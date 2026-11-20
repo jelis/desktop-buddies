@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desktop Buddies – kleine Helfer gegen das ADHS-Chaos</title>
+<meta name="description" content="Drei süße Wesen auf deinem Desktop: Fokus-Timer, Body Doubling, sanfte Ablenkungs-Bremse, Tagesplan und Termin-Wecker. Kostenlos für Mac & Windows.">
+<meta property="og:title" content="Desktop Buddies">
+<meta property="og:description" content="Kleine Helfer gegen das ADHS-Chaos – für Mac & Windows.">
+<meta property="og:image" content="assets/poster-de.png">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #3a2b3f; --soft: #7d6a85; --paper: #fffdfb; --line: rgba(58, 43, 63, .1);
+    --pink: #ff5f9b; --pink-soft: #ffe3ee; --lilac: #ece2ff; --mint: #d6f2ea; --honey: #ffb02e;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; font-family: Nunito, ui-rounded, system-ui, sans-serif; color: var(--ink); line-height: 1.55;
+    background: linear-gradient(175deg, #ffeef5 0%, #f3ecff 40%, #e9f8f2 100%); background-attachment: fixed;
+  }
+  html[data-lang="de"] [lang="en"], html[data-lang="en"] [lang="de"] { display: none !important; }
+  a { color: inherit; }
+  svg.i { width: 1.1em; height: 1.1em; vertical-align: -0.18em; display: inline-block; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navigation */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 20px; text-decoration: none; }
+  .brand img { width: 40px; height: 40px; border-radius: 11px; }
+  .nav-r { display: flex; align-items: center; gap: 10px; }
+  .lang { display: flex; background: #fff; border-radius: 999px; padding: 4px; box-shadow: 0 2px 10px rgba(90,60,120,.08); }
+  .lang button { border: 0; background: none; font: inherit; font-weight: 800; font-size: 14px; padding: 6px 12px; border-radius: 999px; cursor: pointer; color: var(--soft); }
+  .lang button.on { background: var(--ink); color: #fff; }
+  .gh { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 15px; text-decoration: none; padding: 9px 14px; border-radius: 999px; background: #fff; box-shadow: 0 2px 10px rgba(90,60,120,.08); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 40px 0 70px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: #fff; padding: 7px 14px; border-radius: 999px; font-weight: 800; font-size: 14px; color: var(--pink); box-shadow: 0 2px 10px rgba(90,60,120,.08); }
+  h1 { font-size: clamp(42px, 6vw, 68px); line-height: 1.02; margin: 18px 0 18px; letter-spacing: -0.02em; font-weight: 900; }
+  h1 em { font-style: normal; color: var(--pink); }
+  .lead { font-size: 20px; color: var(--soft); max-width: 34em; margin: 0 0 30px; }
+  .dl { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; border-radius: 999px; font-weight: 900; font-size: 17px;
+    text-decoration: none; transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--pink); color: #fff; box-shadow: 0 12px 28px rgba(255, 95, 155, .35); }
+  .btn.secondary { background: var(--ink); color: #fff; box-shadow: 0 12px 28px rgba(58, 43, 63, .25); }
+  .btn small { font-weight: 700; opacity: .8; font-size: 13px; }
+  .fine { margin-top: 14px; font-size: 14px; color: var(--soft); }
+
+  .stagebox { position: relative; height: 380px; }
+  .bubble {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 300px; background: var(--paper); border-radius: 22px;
+    padding: 16px 20px; box-shadow: 0 14px 40px rgba(58,43,63,.16); font-weight: 700; font-size: 17px;
+  }
+  .bubble::after { content: ""; position: absolute; bottom: -9px; right: 60px; width: 20px; height: 20px; background: var(--paper); transform: rotate(45deg); border-radius: 3px; }
+  .bubble .who { font-size: 13px; font-weight: 900; color: #ff8fb3; }
+  .trio { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
+  .buddy { width: 150px; height: 150px; animation: hop 2.6s ease-in-out infinite; }
+  .buddy:nth-child(2) { animation-delay: .3s; } .buddy:nth-child(3) { animation-delay: .6s; }
+  .buddy svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 6px 8px rgba(0,0,0,.1)); }
+  .buddy .eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.2s infinite; }
+  .eyes-closed { display: none; }
+  @keyframes hop { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-22px); } 90% { transform: translateY(0); } }
+  @keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+
+  /* Abschnitte */
+  section { padding: 70px 0; }
+  h2 { font-size: clamp(32px, 4.4vw, 46px); line-height: 1.1; margin: 0 0 14px; letter-spacing: -0.015em; font-weight: 900; text-align: center; }
+  .sub { text-align: center; color: var(--soft); font-size: 19px; max-width: 40em; margin: 0 auto 44px; }
+
+  .video { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center; }
+  .phone { width: 300px; aspect-ratio: 9 / 16; border-radius: 40px; overflow: hidden; background: #fff; box-shadow: 0 30px 70px rgba(90,60,120,.25); border: 8px solid #fff; }
+  .phone video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video h2, .video .sub { text-align: left; margin-left: 0; }
+  .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .checks li { display: flex; gap: 12px; align-items: flex-start; font-size: 18px; font-weight: 700; }
+  .checks li svg { color: var(--pink); flex-shrink: 0; margin-top: 3px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .card { background: rgba(255,255,255,.85); border-radius: 26px; padding: 24px 22px; box-shadow: 0 6px 24px rgba(90,60,120,.07); }
+  .card .ic { width: 48px; height: 48px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .card .ic svg { width: 26px; height: 26px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; font-weight: 900; }
+  .card p { margin: 0; color: var(--soft); font-size: 15px; }
+
+  .looks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .look { background: rgba(255,255,255,.85); border-radius: 28px; padding: 22px; text-align: center; box-shadow: 0 6px 24px rgba(90,60,120,.07); }
+  .look h3 { margin: 0 0 4px; font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .look .row { display: flex; justify-content: center; gap: 4px; margin-top: 10px; }
+  .look .row div { flex: 1; min-width: 0; max-width: 100px; text-align: center; font-weight: 800; font-size: 14px; }
+  .look .row svg { width: 100%; max-width: 90px; height: auto; aspect-ratio: 1; overflow: visible; }
+  .look .row .shadow { display: none; }
+
+  .install { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .install .card { padding: 30px; }
+  .install h3 { font-size: 22px; display: flex; align-items: center; gap: 10px; }
+  .install ol { margin: 12px 0 0; padding-left: 22px; }
+  .install li { margin-bottom: 8px; }
+  code { background: #f3edf6; padding: 2px 8px; border-radius: 8px; font-size: 14px; word-break: break-all; }
+
+  .cta-box { text-align: center; background: #fff; border-radius: 40px; padding: 56px 28px; box-shadow: 0 20px 60px rgba(90,60,120,.12); }
+  .cta-box .dl { justify-content: center; margin-top: 24px; }
+  .privacy { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--soft); font-weight: 700; }
+
+  footer { text-align: center; color: var(--soft); font-size: 14px; padding: 40px 0 60px; }
+
+  @media (max-width: 900px) {
+    .hero, .video, .install { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .looks { grid-template-columns: 1fr; }
+    .video { justify-items: center; }
+    .video h2, .video .sub { text-align: center; }
+  }
+  @media (max-width: 520px) {
+    .grid { grid-template-columns: 1fr; }
+    .buddy { width: 110px; height: 110px; }
+    .stagebox { height: 300px; }
+    .bubble { width: 260px; font-size: 15px; }
+    .gh span { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .buddy, .buddy .eyes { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#"><img src="assets/icon.png" alt="">Desktop Buddies</a>
+    <div class="nav-r">
+      <div class="lang"><button data-set="de">DE</button><button data-set="en">EN</button></div>
+      <a class="gh" data-repo-link href="#"><i data-i="github"></i><span>GitHub</span></a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <span class="eyebrow"><i data-i="sparkles"></i><span lang="de">Kostenlos für Mac & Windows</span><span lang="en">Free for Mac & Windows</span></span>
+      <h1 lang="de">Kleine Helfer gegen das <em>ADHS-Chaos</em></h1>
+      <h1 lang="en">Tiny helpers for <em>ADHD brains</em></h1>
+      <p class="lead" lang="de">Drei süße Wesen wohnen unten auf deinem Bildschirm. Sie halten die Zeit im Blick, arbeiten mit dir mit, fangen Ablenkungen sanft ab und erinnern dich ans Trinken – ohne Druck, ohne Schimpfen.</p>
+      <p class="lead" lang="en">Three cute creatures live at the bottom of your screen. They keep track of time, work right next to you, gently catch distractions and remind you to drink water – no pressure, no guilt.</p>
+      <div class="dl">
+        <a class="btn primary" data-dl="mac" href="#"><i data-i="download"></i><span lang="de">Für Mac laden</span><span lang="en">Download for Mac</span></a>
+        <a class="btn secondary" data-dl="win" href="#"><i data-i="download"></i><span lang="de">Für Windows laden</span><span lang="en">Download for Windows</span></a>
+      </div>
+      <div class="fine" lang="de">Mac mit Apple-Chip (M1–M4) · Windows 10/11 · <a href="#installieren">Installationshilfe</a></div>
+      <div class="fine" lang="en">Mac with Apple chip (M1–M4) · Windows 10/11 · <a href="#installieren">Install help</a></div>
+    </div>
+    <div class="stagebox">
+      <div class="bubble"><div class="who">Mochi</div>
+        <span lang="de">25 Minuten nur für deine eine Aufgabe. Ich pass auf die Zeit auf!</span>
+        <span lang="en">25 minutes just for your one task. I'll keep an eye on the time!</span>
+      </div>
+      <div class="trio" id="trio"></div>
+    </div>
+  </header>
+</div>
+
+<section>
+  <div class="wrap video">
+    <div class="phone">
+      <video lang="de" src="assets/reel-de.mp4" poster="assets/poster-de.png" autoplay muted loop playsinline></video>
+      <video lang="en" src="assets/reel-en.mp4" poster="assets/poster-en.png" autoplay muted loop playsinline></video>
+    </div>
+    <div>
+      <h2 lang="de">Für Gehirne, die gern abschweifen</h2>
+      <h2 lang="en">For brains that love to wander</h2>
+      <p class="sub" lang="de">Gebaut von jemandem mit ADHS – für alle, denen To-do-Apps zu streng und Timer zu langweilig sind.</p>
+      <p class="sub" lang="en">Built by someone with ADHD – for everyone who finds to-do apps too strict and timers too boring.</p>
+      <ul class="checks">
+        <li><i data-i="sparkles"></i><span lang="de">Nur eine Aufgabe auf einmal sichtbar</span><span lang="en">Only one task visible at a time</span></li>
+        <li><i data-i="sparkles"></i><span lang="de">Erinnerungen warten bis zur Pause, statt dich rauszureißen</span><span lang="en">Reminders wait for your break instead of interrupting you</span></li>
+        <li><i data-i="sparkles"></i><span lang="de">Belohnung statt Schuldgefühle: Herzen, Level, Konfetti</span><span lang="en">Rewards instead of guilt: hearts, levels, confetti</span></li>
+        <li><i data-i="sparkles"></i><span lang="de">Klicks gehen durch die Wesen durch – sie stören nie</span><span lang="en">Clicks pass right through them – they never get in the way</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 lang="de">Was die Buddies können</h2>
+    <h2 lang="en">What the buddies do</h2>
+    <p class="sub" lang="de">Alles, was einem ADHS-Gehirn im Arbeitsalltag hilft – verpackt in drei kleine Freunde.</p>
+    <p class="sub" lang="en">Everything that helps an ADHD brain through the workday – packed into three little friends.</p>
+    <div class="grid" id="features"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 lang="de">Klassisch, Gamer oder Theater</h2>
+    <h2 lang="en">Classic, gamer or theater</h2>
+    <p class="sub" lang="de">Jedes Wesen gibt es in drei Looks – mit eigenen Sprüchen und Requisiten. Dazu Mützen, Kronen & Brillen aus dem Herzen-Laden.</p>
+    <p class="sub" lang="en">Every creature comes in three looks – with their own lines and props. Plus hats, crowns & glasses from the heart shop.</p>
+    <div class="looks" id="looks"></div>
+  </div>
+</section>
+
+<section id="installieren">
+  <div class="wrap">
+    <h2 lang="de">So installierst du sie</h2>
+    <h2 lang="en">How to install</h2>
+    <p class="sub" lang="de">Die App ist (noch) nicht bei Apple oder Microsoft registriert. Darum zeigt dein Computer beim ersten Start eine Warnung – so kommst du vorbei:</p>
+    <p class="sub" lang="en">The app isn't registered with Apple or Microsoft (yet), so your computer shows a warning on first launch. Here's how to get past it:</p>
+    <div class="install">
+      <div class="card">
+        <h3><i data-i="monitor"></i> Mac</h3>
+        <ol lang="de">
+          <li>ZIP herunterladen und doppelklicken.</li>
+          <li><b>Desktop Buddies</b> in den Ordner <b>Programme</b> ziehen und öffnen.</li>
+          <li>Bei „Apple konnte nicht überprüfen …“ auf <b>Fertig</b> klicken.</li>
+          <li><b>Systemeinstellungen → Datenschutz & Sicherheit</b> → ganz unten <b>„Trotzdem öffnen“</b>.</li>
+          <li>Klappt das nicht, im Terminal: <code>xattr -dr com.apple.quarantine "/Applications/Desktop Buddies.app"</code></li>
+        </ol>
+        <ol lang="en">
+          <li>Download the ZIP and double-click it.</li>
+          <li>Drag <b>Desktop Buddies</b> into <b>Applications</b> and open it.</li>
+          <li>When it says “Apple could not verify…”, click <b>Done</b>.</li>
+          <li><b>System Settings → Privacy & Security</b> → at the bottom click <b>“Open Anyway”</b>.</li>
+          <li>If that doesn't work, run in Terminal: <code>xattr -dr com.apple.quarantine "/Applications/Desktop Buddies.app"</code></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3><i data-i="monitor"></i> Windows</h3>
+        <ol lang="de">
+          <li>ZIP herunterladen, Rechtsklick → <b>Alle extrahieren</b>.</li>
+          <li>Im Ordner <b>Desktop Buddies.exe</b> doppelklicken.</li>
+          <li>Bei „Der Computer wurde durch Windows geschützt“ auf <b>Weitere Informationen</b> → <b>Trotzdem ausführen</b>.</li>
+          <li>Das Mochi-Symbol erscheint unten rechts neben der Uhr – ein Klick öffnet das Menü.</li>
+        </ol>
+        <ol lang="en">
+          <li>Download the ZIP, right-click → <b>Extract All</b>.</li>
+          <li>Double-click <b>Desktop Buddies.exe</b> in the folder.</li>
+          <li>On “Windows protected your PC”, click <b>More info</b> → <b>Run anyway</b>.</li>
+          <li>The Mochi icon appears next to the clock – click it for the menu.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-box">
+      <h2 lang="de">Bereit für ein bisschen weniger Chaos?</h2>
+      <h2 lang="en">Ready for a little less chaos?</h2>
+      <div class="dl">
+        <a class="btn primary" data-dl="mac" href="#"><i data-i="download"></i><span lang="de">Für Mac laden</span><span lang="en">Download for Mac</span></a>
+        <a class="btn secondary" data-dl="win" href="#"><i data-i="download"></i><span lang="de">Für Windows laden</span><span lang="en">Download for Windows</span></a>
+      </div>
+      <div class="privacy"><i data-i="shield-check"></i>
+        <span lang="de">Alles bleibt auf deinem Computer. Kein Konto, kein Tracking.</span>
+        <span lang="en">Everything stays on your computer. No account, no tracking.</span>
+      </div>
+      <div class="privacy" style="display:flex;justify-content:center"><i data-i="languages"></i>
+        <span lang="de">Die App ist aktuell auf Deutsch.</span>
+        <span lang="en">The app is currently in German.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span lang="de">Mit viel</span><span lang="en">Made with lots of</span> <i data-i="heart"></i> <span lang="de">gemacht · Icons von</span><span lang="en">· Icons by</span> <a href="https://lucide.dev">Lucide</a> · <a data-repo-link href="#">GitHub</a>
+</footer>
+
+<script src="assets/icons.js"></script>
+<script src="assets/creatures.js"></script>
+<script src="assets/variants.js"></script>
+<script>
+  // ---- Hier anpassen, falls das Repo anders heißt ----
+  const REPO = 'jelis/desktop-buddies';
+  const FILES = { mac: 'Desktop-Buddies-Mac.zip', win: 'Desktop-Buddies-Windows.zip' };
+
+  const ic = (n) => (window.ICONS[n] ? `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${window.ICONS[n]}</svg>` : '');
+  document.querySelectorAll('[data-dl]').forEach((a) => { a.href = `https://github.com/${REPO}/releases/latest/download/${FILES[a.dataset.dl]}`; });
+  document.querySelectorAll('[data-repo-link]').forEach((a) => { a.href = `https://github.com/${REPO}`; });
+
+  // Sprache
+  const setLang = (l) => {
+    document.documentElement.dataset.lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll('.lang button').forEach((b) => b.classList.toggle('on', b.dataset.set === l));
+    document.querySelectorAll('video').forEach((v) => { if (v.getAttribute('lang') === l) v.play().catch(() => {}); else v.pause(); });
+    try { localStorage.setItem('lang', l); } catch { /* egal */ }
+  };
+  document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.set)));
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch { /* egal */ }
+  setLang(saved || (navigator.language || 'de').startsWith('de') ? (saved || 'de') : 'en');
+
+  // Wesen im Hero
+  const V = window.VARIANTS;
+  document.getElementById('trio').innerHTML = ['knopf', 'pip', 'mochi'].map((id) => `<div class="buddy">${V[id].classic.svg}</div>`).join('');
+
+  // Funktionen
+  const F = [
+    ['timer', '#ff5f9b', 'Fokus-Timer', 'Focus timer', 'Sprints von 5 bis 45 Minuten – mit Pausen-Ideen und Konfetti am Ende.', 'Sprints from 5 to 45 minutes – with break ideas and confetti at the end.'],
+    ['laptop', '#8b7bff', 'Body Doubling', 'Body doubling', 'Während du arbeitest, tippen und lesen die Buddies sichtbar mit.', 'While you work, the buddies visibly type and read along with you.'],
+    ['eye', '#ffb02e', 'Ablenkungs-Bremse', 'Distraction brake', 'Öffnest du im Sprint YouTube & Co., fragt Mochi freundlich nach.', 'Open YouTube & co. mid-sprint and Mochi kindly checks in.'],
+    ['clipboard-list', '#4fcfb0', 'Tagesplan', 'Daily plan', 'Morgens 3 wichtige Dinge – und „Zu groß?“ macht daraus Mini-Schritte.', '3 important things each morning – and “Too big?” turns them into tiny steps.'],
+    ['alarm-clock', '#5aa9e6', 'Termin-Wecker', 'Appointment alarm', 'Gegen Zeitblindheit: Vorwarnung, bei Terminen außer Haus schon 1 Std vorher.', 'Against time blindness: early warnings, 1 hour ahead for places you need to go.'],
+    ['square-parking', '#a78bfa', 'Gedanken-Parkplatz', 'Thought parking', 'Ablenkende Gedanken schnell parken – getippt oder als Sprachnotiz.', 'Park distracting thoughts quickly – typed or as a voice note.'],
+    ['droplet', '#3fa2f0', 'Wasser & Pausen', 'Water & breaks', 'Erinnert ans Trinken und bremst sanft, wenn der Hyperfokus zu lang wird.', 'Reminds you to drink and gently brakes when hyperfocus runs too long.'],
+    ['heart', '#ff7a55', 'Herzen & Looks', 'Hearts & looks', 'Sammle Herzen für Snacks, Mützen und Kronen. Dazu Fokus-Geräusche.', 'Collect hearts for snacks, hats and crowns. Plus focus sounds.'],
+  ];
+  document.getElementById('features').innerHTML = F.map(([i, c, tde, ten, dde, den]) => `
+    <div class="card"><div class="ic" style="background:${c}22;color:${c}">${ic(i)}</div>
+      <h3><span lang="de">${tde}</span><span lang="en">${ten}</span></h3>
+      <p><span lang="de">${dde}</span><span lang="en">${den}</span></p></div>`).join('');
+
+  // Looks
+  const LOOKS = [['classic', 'flower-2', 'Klassisch', 'Classic'], ['gamer', 'gamepad-2', 'Gamer', 'Gamer'], ['theater', 'drama', 'Theater', 'Theater']];
+  document.getElementById('looks').innerHTML = LOOKS.map(([th, i, de, en]) => `
+    <div class="look"><h3>${ic(i)}<span lang="de">${de}</span><span lang="en">${en}</span></h3>
+      <div class="row">${['mochi', 'pip', 'knopf'].map((id) => `<div>${V[id][th].svg}<br>${V[id][th].name}</div>`).join('')}</div></div>`).join('');
+
+  // Platzhalter-Icons füllen
+  document.querySelectorAll('i[data-i]').forEach((el) => { el.outerHTML = ic(el.dataset.i); });
+</script>
+</body>
+</html>
