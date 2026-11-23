@@ -342,8 +342,8 @@
         <a class="btn secondary" data-dl="win" href="#"><i data-i="download"></i><span lang="de">Für Windows laden</span><span lang="en">Download for Windows</span></a>
       </div>
       <div class="privacy"><i data-i="shield-check"></i>
-        <span lang="de">Alles bleibt auf deinem Computer. Kein Konto, kein Tracking.</span>
-        <span lang="en">Everything stays on your computer. No account, no tracking.</span>
+        <span lang="de">Die App: alles bleibt auf deinem Computer. Kein Konto, kein Tracking. Diese Webseite zählt Besuche anonym mit GoatCounter, ohne Cookies.</span>
+        <span lang="en">The app: everything stays on your computer. No account, no tracking. This website counts visits anonymously with GoatCounter, without cookies.</span>
       </div>
       <div class="privacy" style="display:flex;justify-content:center"><i data-i="languages"></i>
         <span lang="de">Die App spricht Deutsch und Englisch – automatisch passend zu deinem System.</span>
@@ -366,7 +366,12 @@
   const FILES = { mac: 'Desktop-Buddies-Mac.zip', win: 'Desktop-Buddies-Windows.zip' };
 
   const ic = (n) => (window.ICONS[n] ? `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${window.ICONS[n]}</svg>` : '');
-  document.querySelectorAll('[data-dl]').forEach((a) => { a.href = `https://github.com/${REPO}/releases/latest/download/${FILES[a.dataset.dl]}`; });
+  document.querySelectorAll('[data-dl]').forEach((a) => {
+    a.href = `https://github.com/${REPO}/releases/latest/download/${FILES[a.dataset.dl]}`;
+    // GoatCounter zählt Klicks auf die Download-Buttons als Ereignis „download-mac“ / „download-win“
+    a.dataset.goatcounterClick = `download-${a.dataset.dl}`;
+    a.dataset.goatcounterTitle = a.dataset.dl === 'mac' ? 'Download Mac' : 'Download Windows';
+  });
   document.querySelectorAll('[data-repo-link]').forEach((a) => { a.href = `https://github.com/${REPO}`; });
 
   // Sprache
@@ -411,5 +416,7 @@
   // Platzhalter-Icons füllen
   document.querySelectorAll('i[data-i]').forEach((el) => { el.outerHTML = ic(el.dataset.i); });
 </script>
+<!-- Besucherzählung: GoatCounter (ohne Cookies, keine persönlichen Daten) -->
+<script data-goatcounter="https://desktopbuddies.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
