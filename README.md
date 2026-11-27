@@ -12,9 +12,9 @@ a daily plan, appointment reminders, water & break reminders – plus classic, g
 | Mac (Apple chip M1–M4) | [Desktop-Buddies-Mac.zip](https://github.com/jelis/desktop-buddies/releases/latest/download/Desktop-Buddies-Mac.zip) |
 | Windows 10/11 (64-bit) | [Desktop-Buddies-Windows.zip](https://github.com/jelis/desktop-buddies/releases/latest/download/Desktop-Buddies-Windows.zip) |
 
-The app is not signed with Apple/Microsoft yet, so your computer shows a warning on first launch –
-see the [install help](https://jelis.github.io/desktop-buddies/#installieren).
+The Mac version is notarized by Apple and opens without a warning. On Windows you'll see a notice on
+first launch – see the [install help](https://jelis.github.io/desktop-buddies/#installieren).
 
-Everything stays on your computer. No account, no tracking. The app is currently in German.
+Everything stays on your computer. No account, no tracking. Available in English and German (follows your system language).
 
 Icons by [Lucide](https://lucide.dev) (ISC license).

@@ -196,3 +196,23 @@ window.FLAVOR = {
     askTask: 'Welche Szene spielen wir gerade? [[clapperboard]]\n(Nur eine. Der Rest des Stücks wartet.)',
   },
 };
+
+// English lines for the gamer & theater looks
+window.FLAVOR_EN = {
+  gamer: {
+    focusStart: (m, t) => `Quest started! [[swords]] ${m} minutes for:\n“${t}”\nI've got the timer covered. [[gamepad-2]]`,
+    focusDone: (m) => `Level cleared! [[trophy]] ${m} min of focus – +XP!\nTime for a break at the save point. [[save]]`,
+    water: ['Mana low! [[droplet]] A sip of water refills the bar.', 'HP regen available: 1 glass of water = +10 focus. [[droplet]]', 'Potion time! [[sparkle]] Water counts as a healing potion too.'],
+    move: ['Stretch buff available! [[person-standing]] Arms up, roll your shoulders.', 'Quick AFK: walk your character across the room! [[footprints]]', 'Fix the neck bug: head slowly left, then right. [[activity]]'],
+    taskDone: (t) => `Quest complete: “${t}”! [[trophy]] Loot acquired!`,
+    askTask: 'What is your current main quest? [[map]]\n(Just one. Side quests can wait.)',
+  },
+  theater: {
+    focusStart: (m, t) => `Curtain up! [[drama]] ${m} minutes on stage for:\n“${t}”\nI'll give you your cue when the act is over.`,
+    focusDone: (m) => `Bravo! [[party-popper]][[party-popper]] ${m} minutes on stage!\nNow: a break backstage.`,
+    water: ['Your voice needs water! [[droplet]] A sip before the next act.', 'Even the greatest divas drink water. [[droplet]] Cheers!', 'Dressing-room tip: a glass of water, then back on. [[droplet]]'],
+    move: ['Warm up like before rehearsal: loosen your shoulders, stretch! [[person-standing]]', 'Stride across the stage once – well, across the room! [[footprints]]', 'Practise your bow! Deep down, slowly up. [[person-standing]]'],
+    taskDone: (t) => `“${t}” – that scene nailed it! [[flower-2]] Roses on stage!`,
+    askTask: 'Which scene are we playing right now? [[clapperboard]]\n(Just one. The rest of the play can wait.)',
+  },
+};
